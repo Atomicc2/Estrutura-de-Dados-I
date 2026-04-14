@@ -46,6 +46,22 @@ void InsereFinal(TLista& Lista, TInfo Item){
     }
 }
 
+void InsereOrdenado(TLista& Lista, TInfo Item) {
+    if(Lista.tamanho < Tmax) {
+        int pos = 0;
+        while(pos < Lista.tamanho && Lista.itens[pos].Chave < Item.Chave) {
+            pos++;
+        }
+        for(int i = Lista.tamanho; i > pos; i--) {
+            Lista.itens[i] = Lista.itens[i-1];
+        }
+        Lista.itens[pos] = Item;
+        Lista.tamanho++;
+    } else {
+        cout << "Lista cheia. Não é possível inserir." << endl;
+    }
+}
+
 void RemoveInicio(TLista& Lista) {
     if(Lista.tamanho > 0) {
         for(int i = 0; i < Lista.tamanho -1; i++) {
@@ -82,3 +98,23 @@ void PesquisaRemove(TLista& Lista, int Chave) {
         cout << "Lista vazia. Não é possível remover." << endl;
     }
 }
+
+/* Resposta da primeira quastão
+
+void InsereOrdenado(TLista& Lista, TInfo Item) {
+    if(Lista.tamanho < Tmax) {
+        int pos = 0;
+        while(pos < Lista.tamanho && Lista.itens[pos].Chave < Item.Chave) {
+            pos++;
+        }
+        for(int i = Lista.tamanho; i > pos; i--) {
+            Lista.itens[i] = Lista.itens[i-1];
+        }
+        Lista.itens[pos] = Item;
+        Lista.tamanho++;
+    } else {
+        cout << "Lista cheia. Não é possível inserir." << endl;
+    }
+}
+
+*/

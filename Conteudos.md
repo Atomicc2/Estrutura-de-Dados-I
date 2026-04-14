@@ -15,3 +15,7 @@
 - InsereFinal   / RemoveFinal
 - PesquisaRemove
 - Imprime
+
+## Lista Encadeadas
+- Há uma célula cabeça
+- Cada célula possue um espaço que armazena o ponteiro para a próxima posição
