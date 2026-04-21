@@ -1,7 +1,18 @@
-#define Tmax 5
+#define Tmax 1000
+#include <string>
+using namespace std;
 
 typedef struct {
-    int Chave;
+    int ID;
+    string Rodovia;
+    string Cidade;
+    string Data;
+    string DiaSemana;
+    string Hora;
+    string TipoAcidente;
+    int Feridos;
+    int Mortos;
+    string Descricao;
 } TInfo;
 
 typedef struct {
@@ -12,6 +23,10 @@ typedef struct {
 enum Escolhas {CRIA, INSEREINICIO, INSEREPOSICAO, INSEREFINAL, REMOVEINICIO,
 REMOVEFINAL, PESQUISAREMOVE, IMPRIME, FIM};
 
+void CarregaArquivo(TLista& Lista, const string nomeArquivo);
+int PesquisaPorID(TLista& Lista, int ID);
+void ImprimeAcidentes(TLista& Lista, int ID);
+void ImprimeAcidentesPorCidade(TLista& Lista, string Cidade);
 void Cria(TLista& Lista);
 void InsereInicio(TLista& Lista, TInfo Item);
 void InserePosicao(TLista& Lista, int pos, TInfo Item);
