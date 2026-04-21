@@ -12,6 +12,7 @@ enum Escolhas
     REMOVEINICIO,
     REMOVEFINAL,
     PESQUISAREMOVE,
+    PESQUISAPORID,
     IMPRIME,
     FIM
 };
@@ -19,29 +20,49 @@ enum Escolhas
 Escolhas enterChoice(TLista &lista)
 {
     system("cls");
-    Imprime(lista);
     int menuChoice;
     cout << "\nMenu:" << endl
-         << "1-Insere no Inicio\n"
-         << "2-Insere na Posicao\n"
-         << "3-Insere no Final\n"
-         << "4-Remove do Inicio\n"
-         << "5-Remove do Final\n"
-         << "6-Pesquisa e Remove\n"
-         << "7-Imprime\n"
-         << "8-Fim do programa\n"
+         << "1 - Insere no Inicio\n"
+         << "2 - Insere na Posicao\n"
+         << "3 - Insere no Final\n"
+         << "4 - Remove do Inicio\n"
+         << "5 - Remove do Final\n"
+         << "6 - Pesquisa e Remove\n"
+         << "7 - Pesquisa por ID\n"
+         << "8 - Imprime\n"
+         << "0 - Fim do programa\n"
          << "Opcao: ";
     cin >> menuChoice;
     return (Escolhas)menuChoice;
 }
 void setDados(TInfo &item)
 {
-    cout << "\nInforme o C´odigo: ";
-    cin >> item.Chave;
+    cout << "\nInforme o ID: ";
+    cin >> item.ID;
+    cin.ignore();
+    cout << "Informe a Cidade: ";
+    getline(cin, item.Cidade);
+    cout << "Informe a Rodovia: ";
+    getline(cin, item.Rodovia);
+    cout << "Informe a Data: ";
+    getline(cin, item.Data);
+    cout << "Informe o Dia da Semana: ";
+    getline(cin, item.DiaSemana);
+    cout << "Informe a Hora: ";
+    getline(cin, item.Hora);
+    cout << "Informe o Tipo de Acidente: ";
+    getline(cin, item.TipoAcidente);
+    cout << "Informe o Numero de Feridos: ";
+    cin >> item.Feridos;
+    cout << "Informe o Numero de Mortos: ";
+    cin >> item.Mortos;
+    cin.ignore();
+    cout << "Informe a Descricao: ";
+    getline(cin, item.Descricao);
 }
 void setPosicao(int &pos)
 {
-    cout << "\nInforme a Posi¸c~ao: ";
+    cout << "\nInforme a Posicao: ";
     cin >> pos;
 }
 int main()
@@ -51,10 +72,14 @@ int main()
     int p;
     TLista l;
     Cria(l);
-    Imprime(l);
-    Escolhas opcao;
-    while ((opcao = enterChoice(l)) != FIM)
+    CarregaArquivo(l, "acidentes.txt");
+    int opcao;
+    while (true)
     {
+        opcao = enterChoice(l);
+        if (opcao == FIM)
+            break;
+        
         switch (opcao)
         {
         case INSEREINICIO:
@@ -80,13 +105,21 @@ int main()
             setDados(item);
             PesquisaRemove(l, item);
             break;
+        case PESQUISAPORID:
+            cout << "Informe o ID a pesquisar: ";
+            cin >> p;
+            ImprimePorID(l, p);
+            break;
         case IMPRIME:
             Imprime(l);
             break;
         default:
-            cerr << "Op¸c~ao incorreta\n";
+            cerr << "Opcao incorreta\n";
             break;
         }
+        cout << "\nPressione ENTER para continuar...";
+        cin.ignore();
+        cin.get();
     }
     return 0;
 }

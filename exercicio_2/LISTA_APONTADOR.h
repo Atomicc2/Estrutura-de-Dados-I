@@ -1,10 +1,20 @@
-#pragma once
+#include <string>
+
+using namespace std;
 
 typedef struct NodoLista *Apontador;
 typedef struct
 {
-    int Chave;
-    /*outros componentes*/
+    int ID;
+    string Cidade;
+    string Rodovia;
+    string Data;
+    string DiaSemana;
+    string Hora;
+    string TipoAcidente;
+    int Feridos;
+    int Mortos;
+    string Descricao;
 } TInfo;
 struct NodoLista
 {
@@ -26,3 +36,6 @@ void RemoveInicio(TLista &Lista);
 void RemoveFinal(TLista &Lista);
 void PesquisaRemove(TLista &Lista, TInfo Item);
 void Imprime(TLista Lista);
+void CarregaArquivo(TLista &Lista, const string nomeArquivo);
+void ImprimeAcidente(TLista &Lista, int ID);
+void ImprimePorID(TLista &Lista, int ID);
